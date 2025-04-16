@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+}
+
+.logout-link {
+    color: #ff6b6b;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.content-area {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 50px 0;
+}
+
+.form-control,
+.form-select {
+    padding: 12px 15px;
+    border-color: #e0e0e0;
+}
+
+.btn-primary {
+    background-color: #2575fc;
+    border-color: #2575fc;
+    padding: 12px 20px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #1a5afc;
+}
+
+.image-preview-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+#imagePreviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.remove-image-btn:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.tag-badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* Custom styles go here */
+
+/* dasboard php use css */
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --text-color: #333;
+    --bg-light: #f4f7fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Main Content Styling */
+.main-content {
+    background-color: var(--bg-light);
+    padding: 30px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.notifications-list .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-left: 4px solid transparent;
+}
+
+.notifications-list .list-group-item.info {
+    border-left-color: #2575fc;
+}
+
+.notifications-list .list-group-item.warning {
+    border-left-color: #ff6b6b;
+}
+
+.dashboard-header .btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.2);
+    transition: all 0.3s ease;
+}
+
+.dashboard-header .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(106, 17, 203, 0.3);
+}
+
+.dashboard-header .btn i {
+    margin-right: 8px;
+}
