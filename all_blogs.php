@@ -109,7 +109,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
                             <div class="col-md-6">
                                 <div class="card">
                                     <?php if (!empty($row['image_path'])): ?>
-                                        <img src="<?= htmlspecialchars($row['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+                                        <img src="user/<?= htmlspecialchars($row['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
                                     <?php else: ?>
                                         <img src="https://via.placeholder.com/600x400?text=No+Image" class="card-img-top" alt="No image available">
                                     <?php endif; ?>
@@ -234,7 +234,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
                             ?>
                                     <div class="popular-post">
                                         <?php if (!empty($popular['image_path'])): ?>
-                                            <img src="<?= htmlspecialchars($popular['image_path']) ?>" alt="<?= htmlspecialchars($popular['title']) ?>" class="popular-post-img">
+                                            <img src="user/<?= htmlspecialchars($popular['image_path']) ?>" alt="<?= htmlspecialchars($popular['title']) ?>" class="popular-post-img">
                                         <?php else: ?>
                                             <img src="https://via.placeholder.com/70x70?text=No+Image" alt="No image" class="popular-post-img">
                                         <?php endif; ?>

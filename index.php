@@ -158,7 +158,7 @@ require_once './config/db.php';
                             <div class="col-md-6 mb-4 card-item" data-category="<?= htmlspecialchars($row['category']) ?>">
                                 <div class="card">
                                     <?php if (!empty($row['image_path'])): ?>
-                                        <img src="<?= htmlspecialchars($row['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+                                        <img src="user/<?= htmlspecialchars($row['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
                                     <?php else: ?>
                                         <img src="https://via.placeholder.com/600x400?text=No+Image" class="card-img-top" alt="No image available">
                                     <?php endif; ?>

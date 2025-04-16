@@ -88,7 +88,7 @@ $comments_result = $comments_stmt->get_result();
                     </div>
 
                     <?php if (!empty($post['image_path'])): ?>
-                        <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="post-hero-image">
+                        <img src="user/<?= htmlspecialchars($post['image_path']) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="post-hero-image">
                     <?php endif; ?>
                 </div>
             </div>
