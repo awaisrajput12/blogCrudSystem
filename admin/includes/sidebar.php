@@ -1,155 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel Sidebar</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom Sidebar Styles */
+        body {
+            background-color: #f8f9fa;
+            padding-left: 0; /* Remove default padding */
+        }
 
- <style>
-      body {
-          background-color: #f8f9fa;
-          font-family: 'Arial', sans-serif;
-          overflow-x: hidden;
-      }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 16.666667%; /* col-md-2 width (2/12 = 16.666667%) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: transform 0.3s ease;
+            z-index: 1040;
+        }
 
-      .sidebar {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          height: 100vh;
-          position: fixed;
-          left: 0;
-          top: 0;
-          color: white;
-          transition: all 0.3s;
-          overflow-y: auto;
-          z-index: 1000;
-          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-      }
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-      .sidebar a {
-          color: white;
-          text-decoration: none;
-          padding: 12px 15px;
-          display: block;
-          border-left: 3px solid transparent;
-          transition: all 0.2s;
-          font-size: 0.9rem;
-      }
+        .sidebar-nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px 15px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
 
-      .sidebar a:hover,
-      .sidebar a.active {
-          background-color: rgba(255, 255, 255, 0.1);
-          border-left: 3px solid white;
-      }
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: white;
+        }
 
-      .sidebar a i {
-          width: 20px;
-          margin-right: 10px;
-          text-align: center;
-      }
+        .sidebar-nav a i {
+            width: 20px;
+            margin-right: 10px;
+            text-align: center;
+        }
 
-      .main-content {
-          margin-left: 16.666667%;
-          /* col-md-2 is 16.666667% width */
-          padding: 20px;
-          transition: all 0.3s;
-      }
+        .main-content {
+            margin-left: 16.666667%; /* Match sidebar width */
+            transition: margin-left 0.3s;
+        }
 
-      .card-icon {
-          position: absolute;
-          right: 15px;
-          top: 15px;
-          font-size: 2em;
-          opacity: 0.5;
-      }
+        .mobile-menu-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1050;
+            background: rgba(255,255,255,0.2);
+            border: none;
+        }
 
-      .sidebar-header {
-          padding: 20px;
-          margin-top: 20px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 250px; /* Fixed width for mobile */
+            }
 
-      .mobile-menu-btn {
-          display: none;
-          position: fixed;
-          top: 10px;
-          left: 10px;
-          z-index: 1100;
-          background: rgba(255, 255, 255, 0.2);
-          border: none;
-          color: white;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          font-size: 1.2rem;
-      }
+            .sidebar.show {
+                transform: translateX(0);
+            }
 
-      .sidebar-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          z-index: 999;
-          display: none;
-      }
+            .main-content {
+                margin-left: 0 !important;
+            }
 
-      .user-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-      }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
 
-      @media (max-width: 992px) {
-          .sidebar {
-              transform: translateX(-250px);
-              width: 250px;
-          }
+        @media (min-width: 992px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-0">
+        <div class="row flex-nowrap">
+            <!-- Sidebar Column -->
+            <div class="col-md-2 px-0">
+                <!-- Mobile Menu Button -->
+                <button class="btn btn-outline-light mobile-menu-btn d-lg-none" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-          .sidebar.active {
-              transform: translateX(0);
-          }
+                <!-- Sidebar -->
+                <div class="sidebar" id="sidebar">
+                    <div class="sidebar-header text-center">
+                        <h5 class="mb-1">Admin Panel</h5>
+                        <small class="text-white-50">Administrator</small>
+                    </div>
+                    
+                    <nav class="sidebar-nav">
+                        <a href="./dashboard.php" class="active">
+                            <i class="fas fa-home"></i> Dashboard
+                        </a>
+                        <a href="./users.php">
+                            <i class="fas fa-users"></i> Users
+                        </a>
+                        <a href="./manage_blog.php">
+                            <i class="fas fa-edit"></i> Manage Blog
+                        </a>
+                        <a href="./manage_categories.php">
+                            <i class="fas fa-tags"></i> Categories
+                        </a>
+                        <a href="./logout.php" class="mt-4">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 
-          .main-content {
-              margin-left: 0;
-          }
+    <!-- Bootstrap 5 JS (including Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
 
-          .mobile-menu-btn {
-              display: block;
-          }
+            // Toggle sidebar on mobile
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
 
-          .sidebar-overlay.active {
-              display: block;
-          }
-      }
-  </style>
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 991.98) {
+                    const isClickInsideSidebar = sidebar.contains(event.target);
+                    const isClickOnToggleButton = sidebarToggle.contains(event.target);
 
-  <!-- Mobile Menu Button -->
-  <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
-  </button>
+                    if (!isClickInsideSidebar && !isClickOnToggleButton && sidebar.classList.contains('show')) {
+                        sidebar.classList.remove('show');
+                    }
+                }
+            });
 
-  <!-- Sidebar Overlay -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <!-- Sidebar -->
-  <div class="sidebar col-md-2" id="sidebar">
-      <div class="sidebar-header py-4 text-center">
-          <h5>Admin panel</h5>
-          <small class="text-white-50">Administrator</small>
-      </div>
-      <nav>
-          <a href="dashboard.php" class="active">
-              <i class="fas fa-home"></i> Dashboard
-          </a>
-          <a href="users.php">
-              <i class="fas fa-users"></i> Users
-          </a>
-          <a href="manage_blog.php">
-              <i class="fas fa-edit"></i> Manage Blog
-          </a>
-          <a href="./manage_categories.php">
-              <i class="fas fa-tags"></i> Categories
-          </a>
-          <a href="logout.php" class="mt-4">
-              <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-      </nav>
-  </div>
-
-  
+            // Prevent sidebar toggle on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 992) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

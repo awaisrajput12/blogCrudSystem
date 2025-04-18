@@ -19,15 +19,6 @@ require_once './config/db.php';
             --text-muted: #6c757d;
         }
 
-        /* General Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
-        }
-
         h1,
         h2,
         h3,
@@ -40,7 +31,7 @@ require_once './config/db.php';
 
         /* Card Styles (removed hover effect) */
         .contact-card {
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(0, 0, 0, 0.05);
         }
 
         /* Icon Box */
@@ -126,6 +117,75 @@ require_once './config/db.php';
                 font-size: 1.2rem;
             }
         }
+
+        /* Enhanced Hero Section */
+        .contact-hero {
+            background: linear-gradient(135deg, rgba(78, 115, 226, 0.95) 0%, rgba(165, 104, 180, 0.95) 100%);
+            color: white;
+            padding: 7rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content p.lead {
+            font-size: 1.35rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p.lead {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 5rem 0;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-content p.lead {
+                font-size: 1.1rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .d-flex.text-white-50 {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -134,32 +194,57 @@ require_once './config/db.php';
     <?php include "./includes/navbar.php" ?>
     <!-- Main Content -->
     <main>
+
         <!-- Hero Section -->
-        <section class="contact-hero py-5 bg-light">
-            <div class="container py-5">
+        <section class="contact-hero">
+            <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h1 class="display-4 fw-bold mb-4">Let's Connect</h1>
-                        <p class="lead mb-4">Have questions, suggestions, or collaboration ideas? We'd love to hear from you!</p>
-                        <div class="d-flex align-items-center">
-                            <div class="me-4">
-                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <i class="fas fa-paper-plane fs-5"></i>
-                                </div>
+                    <div class="col-lg-6 hero-content animate-fade-in">
+                        <h1 class="display-4 fw-bold mb-4">Let's Connect & Create Something Amazing</h1>
+                        <p class="lead mb-4">We're passionate about helping you. Whether you have a question, feedback, or just want to say hello - we'd love to hear from you!</p>
+
+                        <div class="d-flex flex-wrap gap-3 mb-5 mb-lg-0">
+                            <a href="#contact-form" class="btn btn-hero btn-hero-primary">
+                                <i class="fas fa-paper-plane me-2"></i> Send a Message
+                            </a>
+                            <a href="tel:+1234567890" class="btn btn-hero btn-hero-secondary">
+                                <i class="fas fa-phone me-2"></i> Call Us Now
+                            </a>
+                        </div>
+
+                        <div class="d-flex align-items-center text-white-50">
+                            <div class="me-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>24/7 Support</span>
                             </div>
-                            <div>
-                                <p class="mb-0 fw-bold">Quick Responses</p>
-                                <p class="text-muted small mb-0">Typically within 24 hours</p>
+                            <div class="me-3">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Fast Response</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 mt-4 mt-lg-0">
-                        <img src="./assets/imgs/Facebook-Twitter-Banner.jpg" alt="Contact Illustration" class="img-fluid">
+
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="hero-image-container position-relative">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                alt="Contact us"
+                                class="img-fluid rounded-4 shadow-lg">
+                            <div class="position-absolute bottom-0 start-0 bg-white p-3 rounded-end rounded-top shadow-sm">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary rounded-circle p-2 me-2">
+                                        <i class="fas fa-headset text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 fw-bold">Need immediate help?</p>
+                                        <p class="mb-0 text-primary fw-bold">+1 (234) 567-890</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Contact Options -->
         <section class="contact-options py-5">
             <div class="container">
@@ -221,7 +306,7 @@ require_once './config/db.php';
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="card border-0 shadow-sm">
+                        <div class=" border-0 shadow-sm">
                             <div class="card-body p-4 p-md-5">
                                 <form id="blogContactForm" action="process_contact.php" method="POST">
                                     <div class="row g-3">
@@ -363,11 +448,9 @@ require_once './config/db.php';
 
     <!-- footer -->
     <?php include "./includes/footer.php" ?>
-
     <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Optional: Form Submission Script -->
+    <?php include "./includes/js.php" ?>
+    <!-- script js  -->
     <script>
         document.getElementById('blogContactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -405,6 +488,7 @@ require_once './config/db.php';
                 });
         });
     </script>
+
 </body>
 
 </html>

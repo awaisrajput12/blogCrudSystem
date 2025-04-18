@@ -36,14 +36,19 @@ $stmt->execute();
 $commentResult = $stmt->get_result();
 $commentCount = $commentResult->fetch_assoc()['total_comments'];
 $stmt->close();
+
+// Initialize empty arrays for activities and notifications
+$recentActivities = [];
+$notifications = [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include "./assets/includes/header.php" ?>
 
 <body>
     <!-- Sidebar Toggle Button (visible only on mobile) -->
-    <button class="btn sidebar-toggle d-md-none">
+    <button class="btn btn-primary sidebar-toggle d-lg-none position-fixed" style="z-index: 999; top: 10px; left: 10px;">
         <i class="fas fa-bars"></i>
     </button>
 
@@ -52,30 +57,36 @@ $stmt->close();
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar Column (col-md-2) -->
-            <?php include "includes/sidebar.php" ?>
+            <!-- Sidebar Column -->
+            <?php include "./assets/includes/sidebar.php" ?>
 
-            <!-- Main Content Column (col-md-10) -->
-            <div class="col-md-10 main-content">
+            <!-- Main Content Column -->
+            <div class="col-lg-10 py-4 main-content">
                 <header class="dashboard-header">
                     <div>
-                        <h1 class="mb-2">Dashboard</h1>
+                        <h1 class="mb-1">Dashboard</h1>
                         <p class="text-muted">Welcome back, <?php echo htmlspecialchars($user['username']); ?>!</p>
                     </div>
-                    <!-- Add this back button -->
-                    <a href="../index.php" class="btn btn-primary">
-                        <i class="fas fa-home me-2"></i> Back to Index
+                    <a href="../index.php" class="btn btn-outline-primary">
+                        <i class="fas fa-home me-2"></i> Back to Home
                     </a>
                 </header>
-                <!-- Blog & Comment Stats Card -->
-                <div class="card my-4">
-                    <div class="card-body">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
+
+                <!-- Stats Summary Row -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <i class="fas fa-newspaper"></i>
+                            <h2><?php echo $blogCount; ?></h2>
+                            <p>Total Blogs</p>
                         </div>
-                        <h5 class="card-title">Your Content</h5>
-                        <p><strong>Total Blogs:</strong> <?php echo $blogCount; ?></p>
-                        <p><strong>Total Comments:</strong> <?php echo $commentCount; ?></p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card" style="background: linear-gradient(135deg, var(--success-color), var(--accent-color));">
+                            <i class="fas fa-comments"></i>
+                            <h2><?php echo $commentCount; ?></h2>
+                            <p>Total Comments</p>
+                        </div>
                     </div>
                 </div>
 
@@ -84,60 +95,25 @@ $stmt->close();
                     <div class="card">
                         <div class="card-body">
                             <div class="card-icon">
-                                <i class="fas fa-id-card"></i>
+                                <i class="fas fa-user"></i>
                             </div>
                             <h5 class="card-title">Personal Information</h5>
-                            <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-                            <p><strong>CNIC:</strong> <?php echo htmlspecialchars($user['cnic']); ?></p>
-                            <p><strong>Phone:</strong> <?php echo htmlspecialchars($user['phone']); ?></p>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activities Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon">
-                                <i class="fas fa-history"></i>
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th>Username:</th>
+                                        <td><?php echo htmlspecialchars($user['username']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CNIC:</th>
+                                        <td><?php echo htmlspecialchars($user['cnic']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone:</th>
+                                        <td><?php echo htmlspecialchars($user['phone']); ?></td>
+                                    </tr>
+                                </table>
                             </div>
-                            <h5 class="card-title">Recent Activities</h5>
-                            <?php if (!empty($recentActivities)): ?>
-                                <ul class="list-unstyled">
-                                    <?php foreach ($recentActivities as $activity): ?>
-                                        <li>
-                                            <?php echo htmlspecialchars($activity['action']); ?>
-                                            <small class="text-muted">
-                                                (<?php echo htmlspecialchars($activity['date']); ?>)
-                                            </small>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php else: ?>
-                                <p>No recent activities</p>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <!-- Notifications Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <h5 class="card-title">Notifications</h5>
-                            <?php if (!empty($notifications)): ?>
-                                <div class="notifications-list">
-                                    <ul class="list-group list-group-flush">
-                                        <?php foreach ($notifications as $notification): ?>
-                                            <li class="list-group-item <?php echo htmlspecialchars($notification['type']); ?>">
-                                                <?php echo htmlspecialchars($notification['message']); ?>
-                                                <span class="badge bg-primary">New</span>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div>
-                            <?php else: ?>
-                                <p>No new notifications</p>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -146,7 +122,9 @@ $stmt->close();
     </div>
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include "./assets/includes/js.php" ?>
+    <!-- Your custom JS -->
+    <script src="assets/js/script.js"></script>
 
 </body>
 

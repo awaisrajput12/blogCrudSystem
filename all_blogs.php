@@ -106,7 +106,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
                             // Format the date
                             $created_date = date('F j, Y', strtotime($row['created_at']));
                     ?>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-4">
                                 <div class="card">
                                     <?php if (!empty($row['image_path'])): ?>
                                         <img src="user/<?= htmlspecialchars($row['image_path']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
@@ -131,7 +131,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
                                                 <i class="far fa-heart"></i>
                                                 <span class="like-count"><?= htmlspecialchars($row['likes']) ?></span>
                                             </button>
-                                            <a href="blog_deatils.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary">Read More</a>
+                                            <a href="blog_deatils.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">Read More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -287,9 +287,9 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
 
     <!-- Footer -->
     <?php include "./includes/footer.php" ?>
-
     <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include "./includes/js.php" ?>
+    <!-- script js  -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Category filtering
@@ -355,6 +355,7 @@ $currentCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
             });
         });
     </script>
+
 </body>
 
 </html>

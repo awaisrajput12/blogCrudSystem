@@ -34,59 +34,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f4f6f9;
-        }
-        .main-content {
-            padding: 20px;
-        }
-        .table-responsive {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .table {
-            margin-bottom: 0;
-        }
-        .table th {
-            background-color: #f8f9fa;
-            color: #495057;
-            border-bottom: 2px solid #dee2e6;
-        }
-        .pagination {
-            margin-top: 20px;
-        }
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1100;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-        }
 
-        @media (max-width: 992px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-    </style>
-</head>
+<?php include "includes/header.php" ?>
+
 <body>
     <!-- Mobile Menu Button -->
     <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -95,11 +45,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <?php include "./includes/sidebar.php"; ?>
+            <!-- Sidebar - col-md-2 -->
+            <div class="col-md-2 px-0">
+                <?php include "./includes/sidebar.php"; ?>
+            </div>
             
-            <!-- Main Content -->
-            <div class="col-md-10 main-content">
+            <!-- Main Content - col-md-10 -->
+            <div class="col-md-10 my-5 px-4 py-3">
                 <div class="card shadow-sm">
                     <div class="card-header bg-white py-3">
                         <h4 class="mb-0">User Management</h4>
@@ -163,5 +115,12 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.querySelector('.col-md-2').classList.toggle('d-none');
+        });
+    </script>
 </body>
 </html>

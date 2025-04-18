@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($error)) {
             $stmt = $conn->prepare("UPDATE blog_posts SET title = ?, content = ?, category_id = ?, image_path = ?, status = ? WHERE id = ?");
             $stmt->bind_param("ssissi", $title, $content, $category_id, $image_path, $status, $post_id);
-            
+
             if ($stmt->execute()) {
                 $success = "Blog post updated successfully!";
                 // Update post data
@@ -104,43 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Blog Post - Admin Panel</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f6f9;
-        }
-        .sidebar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .main-content {
-            margin-left: 16.666667%;
-            padding: 20px;
-        }
-        .form-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        .current-image {
-            max-width: 200px;
-            margin-top: 10px;
-        }
-    </style>
-</head>
+
+<?php include "includes/header.php" ?>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -171,14 +137,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Main Content -->
-            <div class="col-md-10 main-content">
-                <div class="form-container">
+            <div class="col-md-10 main-content-1">
+                <div class="form-container-1">
                     <h2 class="mb-4">Edit Blog Post</h2>
-                    
+
                     <?php if ($error): ?>
                         <div class="alert alert-danger"><?php echo $error; ?></div>
                     <?php endif; ?>
-                    
+
                     <?php if ($success): ?>
                         <div class="alert alert-success"><?php echo $success; ?></div>
                     <?php endif; ?>
@@ -212,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php if (!empty($post['image_path'])): ?>
                                 <div class="mt-2">
                                     <p>Current Image:</p>
-                                    <img src="../<?php echo htmlspecialchars($post['image_path']); ?>" alt="Current featured image" class="current-image">
+                                    <img src="../<?php echo htmlspecialchars($post['image_path']); ?>" alt="Current featured image" class="current-image-1">
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -239,4 +205,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+
+</html>

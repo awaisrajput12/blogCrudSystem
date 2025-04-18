@@ -32,7 +32,6 @@ try {
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $pendingCount = $row['total'];
-
 } catch (mysqli_sql_exception $e) {
     error_log("Database query error: " . $e->getMessage());
 }
@@ -40,104 +39,75 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .notification-badge {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 0.6rem;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-        
-        .card-icon {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 2.5rem;
-            opacity: 0.3;
-        }
-    </style>
-</head>
+<?php include "./includes/header.php" ?>
 
 <body>
-    <!--sidebar -->
-    <?php include "./includes/sidebar.php"; ?>
+    <div class="container-fluid">
 
-    <!-- Main Content -->
-    <div class="main-content col-md-10" id="mainContent">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Dashboard Overview</h2>
-        </div>
+        <!--sidebar -->
+        <?php include "./includes/sidebar.php"; ?>
 
-        <!-- Stats Cards -->
-        <div class="row mb-4">
-            <div class="col-md-4 col-sm-6 mb-3">
-                <div class="card bg-primary text-white h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Users</h5>
-                        <h2 class="card-text"><?= $total_users ?></h2>
-                        <div class="d-flex align-items-center">
-                            <span class="me-2">+12%</span>
-                            <i class="fas fa-arrow-up"></i>
+        <!-- Main Content -->
+        <div class="main-content my-5 col-md-10" id="mainContent">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Dashboard Overview</h2>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card bg-primary text-white h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Users</h5>
+                            <h2 class="card-text"><?= $total_users ?></h2>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">+12%</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <i class="fas fa-users card-icon"></i>
                         </div>
-                        <i class="fas fa-users card-icon"></i>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card bg-warning text-white h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pending Blogs</h5>
+                            <h2 class="card-text"><?= $pendingCount ?></h2>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">+<?= $pendingCount ?></span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <i class="fas fa-tasks card-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card bg-info text-white h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Categories</h5>
+                            <h2 class="card-text"><?= $total_categories ?></h2>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">+2</span>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <i class="fas fa-tags card-icon"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 mb-3">
-                <div class="card bg-warning text-white h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Pending Blogs</h5>
-                        <h2 class="card-text"><?= $pendingCount ?></h2>
-                        <div class="d-flex align-items-center">
-                            <span class="me-2">+<?= $pendingCount ?></span>
-                            <i class="fas fa-arrow-up"></i>
-                        </div>
-                        <i class="fas fa-tasks card-icon"></i>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-4 col-sm-6 mb-3">
-                <div class="card bg-info text-white h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Categories</h5>
-                        <h2 class="card-text"><?= $total_categories ?></h2>
-                        <div class="d-flex align-items-center">
-                            <span class="me-2">+2</span>
-                            <i class="fas fa-plus"></i>
+            <!-- Growth Chart -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="mb-0">User Growth</h5>
                         </div>
-                        <i class="fas fa-tags card-icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Growth Chart -->
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="mb-0">User Growth</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="growthChart"></canvas>
+                        <div class="card-body h-100">
+                            <div class="chart-container">
+                                <canvas id="growthChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

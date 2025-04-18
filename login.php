@@ -47,7 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <?php include "./includes/header.php" ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Pro</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
         body {
@@ -56,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: 'Poppins', sans-serif;
         }
 
-        .card {
+        .card-1 {
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
@@ -85,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
-                <div class="card">
+                <div class="card card-1">
                     <div class="card-body p-4">
                         <h2 class="card-title text-center mb-4">Login</h2>
 
@@ -119,6 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <?php include "./includes/js.php" ?>
+    <!-- script js  -->
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');

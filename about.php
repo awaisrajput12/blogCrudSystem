@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once './config/db.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,9 +146,9 @@
     <!-- footer -->
     <?php include "./includes/footer.php" ?>
     <!-- Bootstrap 5 JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include "./includes/js.php" ?>
+    <!-- script js  -->
     <script>
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -159,6 +164,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

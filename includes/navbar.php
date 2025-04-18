@@ -9,7 +9,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <a class="navbar-brand fs-2" href="index.php">BLOG PRO</a>
 
         <!-- Mobile toggle button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -23,7 +23,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <!-- Right-aligned links -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./index.php">Home</a>
+                    <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="all_blogs.php">Blog</a>
@@ -61,37 +61,90 @@ $isLoggedIn = isset($_SESSION['user_id']);
     /* Custom Navbar Styling */
     .navbar-custom {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, padding 0.3s ease;
         height: 10vh;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    /* Optional: Hover effect for nav links */
+    /* Navbar brand styling */
+    .navbar-custom .navbar-brand {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        font-weight: 700;
+    }
+
+    /* Nav link styling */
     .navbar-custom .nav-link {
         color: rgba(255, 255, 255, 0.8);
-        transition: color 0.3s ease;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s ease, background 0.3s ease;
+        border-radius: 5px;
     }
 
     .navbar-custom .nav-link:hover {
         color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Ensure active link stands out */
     .navbar-custom .nav-link.active {
         color: #ffffff;
         font-weight: bold;
+        background: rgba(255, 255, 255, 0.15);
     }
 
-    /* Optional: Slight glow effect on brand */
-    .navbar-custom .navbar-brand {
-        color: #ffffff;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    /* Toggler styling */
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Smooth collapse animation */
+    .navbar-collapse {
+        transition: height 0.3s ease;
     }
 
     /* Responsive adjustments */
     @media (max-width: 991px) {
         .navbar-custom {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
+            height: auto;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .navbar-collapse {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem;
+            border-radius: 0 0 10px 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .navbar-nav {
+            text-align: center;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1rem !important;
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .navbar-brand {
+            font-size: 1.5rem !important;
+        }
+
+        .navbar-custom {
+            padding: 0.5rem 0.75rem !important;
         }
     }
 </style>

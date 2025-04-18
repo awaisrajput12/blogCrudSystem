@@ -113,7 +113,8 @@
     <!DOCTYPE html>
     <html lang="en">
 
-    
+    <?php include "./assets/includes/header.php" ?>
+
 
     <body>
         <!-- Sidebar Toggle Button (visible only on mobile) -->
@@ -126,7 +127,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
-                <?php include "includes/sidebar.php" ?>
+                <?php include "./assets/includes/sidebar.php" ?>
 
                 <!-- Content Area -->
                 <div class="col-md-10">
@@ -193,62 +194,11 @@
                 </div>
             </div>
         </div>
-        <!-- Bootstrap 5 JS and Popper.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap 5 JS Bundle with Popper -->
+        <?php include "./assets/includes/js.php" ?>
+        <!-- Your custom JS -->
+        <script src="assets/js/script.js"></script>
 
-        <script>
-            // Image preview functionality
-            document.getElementById('blogImages').addEventListener('change', function(event) {
-                const previewContainer = document.getElementById('imagePreviewContainer');
-                previewContainer.innerHTML = '';
-
-                const files = event.target.files;
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    if (!file.type.match('image.*')) continue;
-
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const previewDiv = document.createElement('div');
-                        previewDiv.className = 'image-preview-container';
-
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'image-preview';
-
-                        const removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-image-btn';
-                        removeBtn.innerHTML = '×';
-                        removeBtn.onclick = function() {
-                            previewDiv.remove();
-                            // Create a new DataTransfer object to update the file input
-                            const dataTransfer = new DataTransfer();
-                            const input = document.getElementById('blogImages');
-
-                            // Add all files except the one being removed
-                            for (let j = 0; j < input.files.length; j++) {
-                                if (j !== i) {
-                                    dataTransfer.items.add(input.files[j]);
-                                }
-                            }
-
-                            input.files = dataTransfer.files;
-                            return false;
-                        };
-
-                        previewDiv.appendChild(img);
-                        previewDiv.appendChild(removeBtn);
-                        previewContainer.appendChild(previewDiv);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Prevent form resubmission on page refresh
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
-        </script>
     </body>
 
     </html>
